@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Offerta {
@@ -32,6 +33,7 @@ public class Offerta {
 	@Column(nullable = false)
 	private LocalDate endOccasione;
 	@Column(nullable = false)
+	@Positive(message = "Deve essere un valore superiore allo zero")
 	private int sconto;
 	
 	@ManyToOne
@@ -47,6 +49,7 @@ public class Offerta {
 		setTitolo(titolo);
 		setStartOccasione(startOccasione);
 		setEndOccasione(endOccasione);
+//		setSconto(100 - sconto /100);
 		setSconto(sconto);
 		setPizza(pizza);
 	}

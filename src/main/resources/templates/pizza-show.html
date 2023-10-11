@@ -8,5 +8,16 @@
     [[*{pic}]] - [[*{name}]] <br />
     <small>[[*{description}]]</small><br />
     [[*{price}]]
+    
+    
+    <ul>
+		<li 
+			th:each="offerta : *{offerte}"
+			th:object="${offerta}"
+		>
+		[[*{startOccasione}]] - [[*{endOccasione}]]
+		[[*{sconto}]]
+		</li>
+	</ul>
 </body>
 </html>

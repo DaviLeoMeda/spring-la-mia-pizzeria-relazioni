@@ -1,5 +1,7 @@
 package org.java.app.db.pizza;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
@@ -40,6 +43,9 @@ public class Pizza {
 	@Column(nullable = false)
 	@Positive(message = "Deve essere un valore superiore alla linea poveraccio")
 	private float price;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<Offerta> offerte;
 	
 	public Pizza() { }
 	public Pizza(String name, String description, String pic, float price) {
@@ -77,6 +83,14 @@ public class Pizza {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	
+	
+	public List<Offerta> getOfferte() {
+		return offerte;
+	}
+	public void setOfferte(List<Offerta> offerte) {
+		this.offerte = offerte;
 	}
 	@Override
 	public String toString() {
