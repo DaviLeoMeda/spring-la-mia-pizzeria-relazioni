@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Pizze: </h1>
+	
+	<a href="/pizze/create">Crea una nuova pizza</a>
+	<br /><br />
+	
+	<form>
+		<label for="research">Search: </label>
+		<input type="text" id="research" name="research" placeholder="Insert here">
+		<input type="submit" id="research" value="Let me look for it!">
+	</form>
+
+	<ul>
+    	<li
+    	    th:each="pizza : ${pizze}"
+    	    th:object="${pizza}"
+    	>
+    	    <a th:href="@{/pizze/{id}(id=*{id})}">
+    	        [[*{pic}]] - [[*{name}]] <br />
+    	        <small>[[*{description}]]</small><br />
+    	        [[*{price}]]
+    	    </a>
+    	    -
+    	    <a th:href="@{/pizze/update/{id}(id=*{id})}">
+				EDIT
+			</a>
+			-
+			<form th:action="@{/pizze/delete/{id}(id=*{id})}" 
+				method="POST"
+				style="display: inline;">
+				<input type="submit" value="DELETE">
+			</form>
+    	</li>
+	</ul>
+</body>
+</html>
