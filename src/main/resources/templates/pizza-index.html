@@ -15,7 +15,8 @@
 		<input type="text" id="research" name="research" placeholder="Insert here">
 		<input type="submit" id="research" value="Let me look for it!">
 	</form>
-
+	
+	
 	<ul>
     	<li
     	    th:each="pizza : ${pizze}"
@@ -24,11 +25,15 @@
     	    <a th:href="@{/pizze/{id}(id=*{id})}">
     	        [[*{pic}]] - [[*{name}]] <br />
     	        <small>[[*{description}]]</small><br />
-    	        [[*{price}]]
+    	        [[*{price}]]<span>€</span>
     	    </a>
     	    -
     	    <a th:href="@{/pizze/update/{id}(id=*{id})}">
 				EDIT
+			</a>
+			-
+			<a th:href="@{/pizze/offerta/{id}(id=*{id})}">
+				OFFERTA
 			</a>
 			-
 			<form th:action="@{/pizze/delete/{id}(id=*{id})}" 
@@ -36,7 +41,7 @@
 				style="display: inline;">
 				<input type="submit" value="DELETE">
 			</form>
-    	</li>
+    	</li> 
 	</ul>
 </body>
 </html>

@@ -2,7 +2,9 @@ package org.java.app.mvc.controller;
 
 import java.util.List;
 
+import org.java.app.db.pizza.Offerta;
 import org.java.app.db.pizza.Pizza;
+import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class PizzaController {
 	
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private OffertaService offertaService;
 	
 	@GetMapping("/pizze")
 	public String getIndex(Model model,
@@ -128,9 +133,46 @@ public class PizzaController {
 	public String deletePizza(@PathVariable int id) {
 		
 		Pizza pizza = pizzaService.findById(id);
+		List<Offerta> offerte = pizza.getOfferte();
+		
+		offertaService.deleteOfferta(offerte);
 		pizzaService.deletePizza(pizza);
 		
+		
 		return "redirect:/pizze";
+	}
+	
+	@GetMapping("/pizze/offerta/{pizza_id}")
+	public String occasione(
+			@PathVariable("pizza_id") int id,
+			Model model) {
+		
+		Pizza pizza = pizzaService.findById(id);
+		Offerta offerta = new Offerta();
+		
+		model.addAttribute("offerta", offerta);
+		model.addAttribute("pizza", pizza);
+		
+		return "offerta-form";
+	}
+	
+	@PostMapping("/offerta/{pizza_id}")
+	public String storeOccasione(
+			@Valid @ModelAttribute Offerta offerta,
+			BindingResult bindingResult, @PathVariable("pizza_id") int id,
+			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			return "offerta-form"; 
+		}
+		
+		Pizza pizza = pizzaService.findById(id);
+		offerta.setPizza(pizza);
+		
+		offertaService.save(offerta);
+		
+		return"redirect:/pizze";
 	}
 	
 }

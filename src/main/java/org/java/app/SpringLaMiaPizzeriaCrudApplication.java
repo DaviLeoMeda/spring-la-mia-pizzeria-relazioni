@@ -48,7 +48,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		Offerta pizzaDelMese = new Offerta("PizzaMese", LocalDate.parse("2023-05-05"), 
 				LocalDate.parse("2023-06-06"), 25, Marghe);
 		Offerta pizzaDellAnno = new Offerta("PizzaAnno", LocalDate.parse("2023-01-01"), 
-				LocalDate.parse("2023-12-01"), 30, Verd);
+	 			LocalDate.parse("2023-12-01"), 30, Verd);
 		Offerta pizzaDellaSettimana = new Offerta("PizzaSettimana", LocalDate.parse("2023-08-01"), 
 				LocalDate.parse("2023-08-07"), 15, Bufa);
 		

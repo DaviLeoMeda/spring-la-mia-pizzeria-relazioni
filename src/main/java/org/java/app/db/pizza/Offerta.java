@@ -49,7 +49,6 @@ public class Offerta {
 		setTitolo(titolo);
 		setStartOccasione(startOccasione);
 		setEndOccasione(endOccasione);
-//		setSconto(100 - sconto /100);
 		setSconto(sconto);
 		setPizza(pizza);
 	}
@@ -109,6 +108,7 @@ public class Offerta {
 	public Pizza getPizza() {
 		return pizza;
 	}
+	
 	public void setPizza(Pizza pizza) {
 		this.pizza = pizza;
 	}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Offerta sulle Pizze: [[${pizza.name}]]</h1>
+	
+	<form
+		th:object="${offerta}"
+		method="POST"
+	>
+	
+		<label for="startOccasione">Inizio offerta</label>
+		<input type="date" name="startOccasione" th:field="*{startOccasione}">
+	
+		<br />
+	
+		<label for="endOccasione">Fine offerta</label>
+		<input type="date" name="endOccasione" th:field="*{endOccasione}">
+	
+		<br />
+	
+		
+		<label for="sconto">Fine offerta</label>
+		<input type="number" name="sconto" th:field="*{sconto}">
+		
+		<br />
+		
+		<input type="submit" value="CREATE">
+	
+	</form>
+</body>
+</html>
