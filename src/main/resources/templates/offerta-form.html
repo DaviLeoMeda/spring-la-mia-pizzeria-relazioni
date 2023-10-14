@@ -5,20 +5,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Offerta sulle Pizze: [[${pizza.name}]]</h1>
+	<h1 th:if="${offerta.id < 1}">[[${pizza.name}]] : Nuova offerta sulle Pizze </h1> 
+	<h1 th:if="${offerta.id > 0}">[[${pizza.name}]] : Modifica offerta sulle Pizze </h1>
 	
 	<form
 		th:object="${offerta}"
 		method="POST"
 	>
-	
+		
+		<label for="titolo">Inizio offerta</label>
+		<input type="text" name="titolo" th:field="*{titolo}">
+		<br />
 		<label for="startOccasione">Inizio offerta</label>
-		<input type="date" name="startOccasione" th:field="*{startOccasione}">
+		<input type="date" name="startOccasione" th:field="*{realStartOcc}">
 	
 		<br />
 	
 		<label for="endOccasione">Fine offerta</label>
-		<input type="date" name="endOccasione" th:field="*{endOccasione}">
+		<input type="date" name="endOccasione" th:field="*{realEndOcc}">
 	
 		<br />
 	
@@ -28,7 +32,8 @@
 		
 		<br />
 		
-		<input type="submit" value="CREATE">
+		<input type="submit" th:value="${offerta.id < 1 ? 'CREATE' : 'UPDATE'}">
+		
 	
 	</form>
 </body>

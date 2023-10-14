@@ -23,7 +23,7 @@
     	    th:object="${pizza}"
     	>
     	    <a th:href="@{/pizze/{id}(id=*{id})}">
-    	        [[*{pic}]] - [[*{name}]] <br />
+    	        [[*{name}]] <br />
     	        <small>[[*{description}]]</small><br />
     	        [[*{price}]]<span>€</span>
     	    </a>

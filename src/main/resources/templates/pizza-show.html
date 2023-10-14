@@ -10,19 +10,22 @@
 	</h1>
     <img th:src="*{pic}" width="300px" />
     <small>[[*{description}]]</small><br />
-    [[*{price}]]
+    <span>Il prezzo è di €</span>[[*{price}]]
     
     <ul>
 		<li 
 			th:each="offerta : *{offerte}"
 			th:object="${offerta}"
 		>
+		<h4>Offerte Speciali:  <a th:href="@{/pizze/offerta/{id}(id=*{id})}">+</a> </h4>
+		
+		[[*{titolo}]] <br />
 		[[*{startOccasione}]] - [[*{endOccasione}]] <br />
 		<div th:if="*{sconto}">
 			Sconto: <br />
 			[[*{sconto}]]<span>%</span>
 		</div>
-		
+		<a th:href="@{/pizze/offerta/edit/{id}(id=*{id})}">EDIT</a>
 		</li>
 	</ul>
 </body>

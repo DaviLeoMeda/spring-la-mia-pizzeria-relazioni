@@ -4,8 +4,10 @@ package org.java.app;
 
 import java.time.LocalDate;
 
+import org.java.app.db.pizza.Ingrediente;
 import org.java.app.db.pizza.Offerta;
 import org.java.app.db.pizza.Pizza;
+import org.java.app.db.serv.IngredienteService;
 import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	@Autowired
 	private OffertaService offertaService;
 	
+	@Autowired
+	private IngredienteService ingredienteService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
 	}
@@ -30,11 +35,25 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Pizza Marghe = new Pizza("Margherita", "la classica", "Foto", 7.99f);
-		Pizza Calz = new Pizza("Calzone", "la ripiena", "Foto", 8.99f);
-		Pizza Napo = new Pizza("Napoli", "la basica", "Foto", 5.99f);
-		Pizza Bufa = new Pizza("Bufalina", "la sfiziosa", "Foto", 9.99f);
-		Pizza Verd = new Pizza("Verdure", "la sana", "Foto", 6.99f);
+		Ingrediente mozzarella = new Ingrediente ("mozzarella");
+		Ingrediente pomodoro = new Ingrediente ("pomodoro");
+		Ingrediente basilico = new Ingrediente ("basilico");
+		Ingrediente melanzane = new Ingrediente ("melanzane");
+		Ingrediente acciughe = new Ingrediente ("acciughe");
+		Ingrediente olive = new Ingrediente ("olive");
+		
+		ingredienteService.save(mozzarella);
+		ingredienteService.save(pomodoro);
+		ingredienteService.save(basilico);
+		ingredienteService.save(melanzane);
+		ingredienteService.save(acciughe);
+		ingredienteService.save(olive);
+		
+		Pizza Marghe = new Pizza("Margherita", "la classica", "https://bing.com/th?id=OSK.7f42c3c8664a1feb4328bb48cccc684b", 7.99f, mozzarella, pomodoro, basilico);
+		Pizza Calz = new Pizza("Calzone", "la ripiena", "https://www.inran.it/wp-content/uploads/2022/04/Calzone-napoletano.jpg", 8.99f, mozzarella, pomodoro, basilico);
+		Pizza Napo = new Pizza("Napoli", "la basica", "https://images.eatsmarter.de/sites/default/files/styles/max_size/public/pizza-napoli-43827.jpg", 5.99f, mozzarella, pomodoro, basilico, acciughe, olive);
+		Pizza Bufa = new Pizza("Bufalina", "la sfiziosa", "https://www.islascanarias.shopping/shop/images/com_hikashop/upload/vendor37/pizza_bufala_807015405.jpg", 9.99f, mozzarella, pomodoro, basilico);
+		Pizza Verd = new Pizza("Verdure", "la sana", "https://i.pinimg.com/originals/5e/5f/66/5e5f6607b2c16f2d8c8b5d36189f7ca7.jpg", 6.99f, mozzarella, pomodoro, basilico, melanzane);
 		
 		pizzaService.save(Marghe);
 		pizzaService.save(Calz);

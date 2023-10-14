@@ -1,6 +1,7 @@
 package org.java.app.db.pizza;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -82,6 +83,17 @@ public class Offerta {
 	public void setStartOccasione(LocalDate startOccasione) {
 		this.startOccasione = startOccasione;
 	}
+	
+	public String getRealStartOcc() {
+		return getStartOccasione() == null
+				? null
+				: getStartOccasione().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+	
+	public void  setRealStartOcc(String startOccasione) {
+		
+		setStartOccasione(LocalDate.parse(startOccasione));
+	}
 
 
 	public LocalDate getEndOccasione() {
@@ -91,6 +103,17 @@ public class Offerta {
 
 	public void setEndOccasione(LocalDate endOccasione) {
 		this.endOccasione = endOccasione;
+	}
+	
+	public String getRealEndOcc() {
+		return getEndOccasione() == null
+				? null
+				: getEndOccasione().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+	
+	public void  setRealEndOcc(String endOccasione) {
+		
+		setEndOccasione(LocalDate.parse(endOccasione));
 	}
 
 

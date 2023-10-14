@@ -5,7 +5,6 @@ package org.java.app.db.serv;
 import java.util.List;
 
 import org.java.app.db.pizza.Offerta;
-import org.java.app.db.pizza.Pizza;
 import org.java.app.db.repo.OffertaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

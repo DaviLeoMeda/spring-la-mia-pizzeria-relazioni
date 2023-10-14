@@ -156,7 +156,7 @@ public class PizzaController {
 		return "offerta-form";
 	}
 	
-	@PostMapping("/offerta/{pizza_id}")
+	@PostMapping("/pizze/offerta/{pizza_id}")
 	public String storeOccasione(
 			@Valid @ModelAttribute Offerta offerta,
 			BindingResult bindingResult, @PathVariable("pizza_id") int id,
@@ -173,6 +173,41 @@ public class PizzaController {
 		offertaService.save(offerta);
 		
 		return"redirect:/pizze";
+	}
+	
+	@GetMapping("/pizze/offerta/edit/{off_id}")
+	public String editOccasione(
+			@PathVariable("off_id") int id,
+			Model model) {
+		
+		Offerta notOfferta = offertaService.findById(id);
+		Pizza pizza = notOfferta.getPizza();
+		
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("offerta", notOfferta);
+		
+		return "offerta-form";
+	}
+	
+	@PostMapping("/pizze/offerta/edit/{off_id}")
+	public String updateOccasione(
+			@Valid @ModelAttribute Offerta offerta,
+			BindingResult bindingResult, 
+			@PathVariable("off_id") int id,
+			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			return "offerta-form"; 
+		}
+		
+		Offerta exOfferta = offertaService.findById(id);
+		Pizza pizza = exOfferta.getPizza();
+		offerta.setPizza(pizza);
+		
+		offertaService.save(offerta);
+		
+		return "redirect:/pizze/" + pizza.getId();
 	}
 	
 }
