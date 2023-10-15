@@ -2,8 +2,10 @@ package org.java.app.mvc.controller;
 
 import java.util.List;
 
+import org.java.app.db.pizza.Ingrediente;
 import org.java.app.db.pizza.Offerta;
 import org.java.app.db.pizza.Pizza;
+import org.java.app.db.serv.IngredienteService;
 import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class PizzaController {
 	
 	@Autowired
 	private OffertaService offertaService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 	
 	@GetMapping("/pizze")
 	public String getIndex(Model model,
@@ -56,7 +61,10 @@ public class PizzaController {
 	@GetMapping("/pizze/create")
 	public String getCreate(Model model) {
 		
+		List<Ingrediente> ingredienti = ingredienteService.findAll();
+		
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredienti", ingredienti);
 		
 		return "pizza-create";
 	}
@@ -95,8 +103,11 @@ public class PizzaController {
 			Model model
 		) {
 		
+		List<Ingrediente> ingredienti = ingredienteService.findAll();
+		
 		Pizza pizza = pizzaService.findById(id);
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredienti", ingredienti);
 		
 		return "pizza-create";
 	}
