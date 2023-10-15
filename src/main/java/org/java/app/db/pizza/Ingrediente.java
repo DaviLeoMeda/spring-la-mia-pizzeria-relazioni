@@ -1,14 +1,16 @@
 package org.java.app.db.pizza;
 
+
+
 import java.util.List;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Ingrediente {
@@ -18,15 +20,13 @@ public class Ingrediente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToMany(mappedBy = "Ingredienti")
+	@ManyToMany(mappedBy = "ingredienti")
 	private List<Pizza> pizze;
 	
-	@Column(nullable = false)
-	@NotNull
 	private String nome;
 	
 	public Ingrediente() {  }
-	public Ingrediente(String name) {
+	public Ingrediente(String nome) {
 		setNome(nome);
 	}
 	public int getId() {

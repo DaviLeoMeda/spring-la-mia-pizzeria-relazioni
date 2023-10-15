@@ -50,7 +50,7 @@ public class Pizza {
 	private List<Offerta> offerte;
 	
 	@ManyToMany
-	private List<Ingrediente> Ingredienti;
+	private List<Ingrediente> ingredienti;
 	
 	public Pizza() { }
 	public Pizza(String name, String description, String pic, float price, Ingrediente... ingredienti) {
@@ -102,11 +102,22 @@ public class Pizza {
 	
 	
 	public List<Ingrediente> getIngredienti() {
-		return Ingredienti;
+		return ingredienti;
 	}
 	public void setIngredienti(List<Ingrediente> ingredienti) {
-		Ingredienti = ingredienti;
+		this.ingredienti = ingredienti;
 	}
+	
+	public boolean hasIngrediente(Ingrediente ingrediente) {
+		if (getIngredienti() == null) return false;
+		
+		for (Ingrediente ing : getIngredienti())
+			if (ingrediente.getId() == ing.getId())
+				return true;
+		
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return "Pizza [id= " + id + ", "

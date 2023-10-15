@@ -12,6 +12,17 @@
     <small>[[*{description}]]</small><br />
     <span>Il prezzo è di €</span>[[*{price}]]
     
+    <h3>Ingredienti:</h3>
+    <ul>
+		<li
+			th:each="ingrediente : *{ingredienti}"
+			th:object="${ingrediente}"
+		>
+			[[*{nome}]]
+		</li>
+	</ul>
+    
+    <h3>Offerte:</h3>
     <ul>
 		<li 
 			th:each="offerta : *{offerte}"
@@ -28,5 +39,7 @@
 		<a th:href="@{/pizze/offerta/edit/{id}(id=*{id})}">EDIT</a>
 		</li>
 	</ul>
+	
+	
 </body>
 </html>

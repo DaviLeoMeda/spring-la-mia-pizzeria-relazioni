@@ -59,6 +59,26 @@
 		</div>
 		<br />
 		
+		<div
+			th:each="ingrediente : *{ingredienti}"
+			th:object="${ingrediente}"
+			>
+			
+			<input
+				type="checkbox"
+				th:id="${'ingredienti-' + ingrediente.id}"
+				name="ingrediente_ids"
+				th:checked="${pizza.hasIngrediente(ingrediente)}"
+			>
+			<label
+				th:for="${'Ingredienti-' + ingrediente.id}"
+			>
+				[[*{nome}]]
+			</label>
+		</div>
+		
+			
+		
 		
 		<input type="submit" th:value="${pizza.id < 0 ? 'Let me create it!' : 'Let me update it!'}" />
 	
