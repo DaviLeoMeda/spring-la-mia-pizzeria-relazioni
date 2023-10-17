@@ -120,11 +120,11 @@ public class Pizza {
 	
 	@Override
 	public String toString() {
-		return "Pizza [id= " + id + ", "
-					+ "name= " + name + ", "
-					+ "description= " + description 
-					+ ", pic= " + pic 
-					+ ", price= " + price + "]";
+		return "Pizza [id= " + getId() + ", "
+					+ "name= " + getName() + ", "
+					+ "description= " + getDescription() 
+					+ ", pic= " + getPic() 
+					+ ", price= " + getPrice() + "]";
 	}
 	
 	

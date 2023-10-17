@@ -10,10 +10,15 @@ import org.java.app.db.pizza.Pizza;
 import org.java.app.db.serv.IngredienteService;
 import org.java.app.db.serv.OffertaService;
 import org.java.app.db.serv.PizzaService;
+import org.java.app.mvc.auth.pojo.Role;
+import org.java.app.mvc.auth.pojo.User;
+import org.java.app.mvc.auth.service.RoleService;
+import org.java.app.mvc.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
@@ -27,6 +32,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IngredienteService ingredienteService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -75,6 +86,21 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		offertaService.save(pizzaDelMese);
 		offertaService.save(pizzaDellAnno);
 		
+		
+		Role userRole = new Role("USER");
+		Role adminRole = new Role("ADMIN");
+		
+		roleService.save(adminRole);
+		roleService.save(userRole);
+		
+		final String pwdAdmin = new BCryptPasswordEncoder().encode("pwd");
+		final String pwdUser = new BCryptPasswordEncoder().encode("pwd");
+		
+		User laforgeAdmin = new User("laforge", pwdAdmin, adminRole);
+		User tuckerUser = new User("tucker", pwdUser, userRole);
+		
+		userService.save(laforgeAdmin);
+		userService.save(tuckerUser);
 	}
 
 }

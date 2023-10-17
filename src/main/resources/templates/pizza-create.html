@@ -66,12 +66,12 @@
 			
 			<input
 				type="checkbox"
-				th:id="${'ingredienti-' + ingrediente.id}"
-				name="ingrediente_ids"
+				th:id="${'ingrediente-' + ingrediente.id}"
+				value="*{id}"
 				th:checked="${pizza.hasIngrediente(ingrediente)}"
 			>
 			<label
-				th:for="${'Ingredienti-' + ingrediente.id}"
+				th:for="${'ingrediente-' + ingrediente.id}"
 			>
 				[[*{nome}]]
 			</label>
